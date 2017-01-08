@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int totalRun = 0;
+    int totalRunForA = 0;
+    int totalRunForB = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,84 +32,103 @@ public class MainActivity extends AppCompatActivity {
         //Team A Wicket
         Button teamAWicket = (Button) findViewById(R.id.team_a_wicket_button);
 
+        //Team B Batsman Runs
+        Button teamBOneRun = (Button) findViewById(R.id.team_b_one_run_button);
+        Button teamBTwoRun = (Button) findViewById(R.id.team_b_two_run_button);
+        Button teamBThreeRun = (Button) findViewById(R.id.team_b_three_run_button);
+        Button teamBFourRun = (Button) findViewById(R.id.team_b_four_run_button);
+        Button teamBSixRun = (Button) findViewById(R.id.team_b_six_run_button);
+
+        //Team B Extra Runs
+        Button teamBWides = (Button) findViewById(R.id.team_b_wide_run_button);
+        Button teamBByes = (Button) findViewById(R.id.team_b_byes_run_button);
+        Button teamBLegByes = (Button) findViewById(R.id.team_b_leg_byes_run_button);
+        Button teamBNoBalls = (Button) findViewById(R.id.team_b_no_ball_run_button);
+
+        //Team B wicket
+        Button teamBWicket = (Button) findViewById(R.id.team_b_wicket_button);
+
+        //Reset Score Button
+        Button resetScores = (Button) findViewById(R.id.reset_score_button);
+
         teamAOneRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(1);
+                int run = addRunsForA(1);
                 displayTeamARun("" + run);
-                displayCommentary("1 run, flighted outside off, brings out the reversey-percy again, swept through point for one");
+                displayCommentary("1 run for Team A, flighted outside off, brings out the reversey-percy again, swept through point for one");
             }
         });
 
         teamATwoRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(2);
+                int run = addRunsForA(2);
                 displayTeamARun("" + run);
-                displayCommentary("2 runs, driven ambitiously on the up, carved over cover point, in the air but no one's there - the batsman carnival of batting rumbles on!");
+                displayCommentary("2 runs for Team A, driven ambitiously on the up, carved over cover point, in the air but no one's there - the batsman carnival of batting rumbles on!");
             }
         });
 
         teamAThreeRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(3);
+                int run = addRunsForA(3);
                 displayTeamARun("" + run);
-                displayCommentary("3 runs, full outside off, good response from Batsman as he gets forward and pushes firmly through the covers");
+                displayCommentary("3 runs for Team A, full outside off, good response from Batsman as he gets forward and pushes firmly through the covers");
             }
         });
 
         teamAFourRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(4);
+                int run = addRunsForA(4);
                 displayTeamARun("" + run);
-                displayCommentary("FOUR, four more, a full toss from the bowler and batsman belts it away through midwicket");
+                displayCommentary("FOUR, four more runs for Team A, a full toss from the bowler and batsman belts it away through midwicket");
             }
         });
 
         teamASixRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(6);
+                int run = addRunsForA(6);
                 displayTeamARun("" + run);
-                displayCommentary("SIX, full and on off, Batsman's times it to perfection as he lofts it with a straight bat over long-off.");
+                displayCommentary("SIX for Team A, full and on off, Batsman's times it to perfection as he lofts it with a straight bat over long-off.");
             }
         });
 
         teamAWides.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run  = addRuns(1);
+                int run  = addRunsForA(1);
                 displayTeamARun("" + run);
-                displayCommentary("1 wide, first signs of swing , but too wide");
+                displayCommentary("1 wide for Team A, first signs of swing , but too wide");
             }
         });
 
         teamANoBalls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(1);
+                int run = addRunsForA(1);
                 displayTeamARun("" + run);
-                displayCommentary("1 no ball, over steps for a no-ball! Batsman has another wild swing and a miss outside off.");
+                displayCommentary("1 no ball for Team A, over steps for a no-ball! Batsman has another wild swing and a miss outside off.");
             }
         });
 
         teamALegByes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(1);
+                int run = addRunsForA(1);
                 displayTeamARun("" + run);
-                displayCommentary("1 leg bye, full on middle, pushed through flat, Batsman tries the big slog again and missed it. This looked plumb but the umpire is not interested. Boos from the crowd on the replay.");
+                displayCommentary("1 leg bye for Team A, full on middle, pushed through flat, Batsman tries the big slog again and missed it. This looked plumb but the umpire is not interested. Boos from the crowd on the replay.");
             }
         });
 
         teamAByes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int run = addRuns(1);
+                int run = addRunsForA(1);
                 displayTeamARun("" + run);
-                displayCommentary("1 bye, darted into leg stump, tries to sweep, misses and it goes off the fielder for a run");
+                displayCommentary("1 bye for Team A, darted into leg stump, tries to sweep, misses and it goes off the fielder for a run");
             }
         });
 
@@ -119,12 +139,117 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Team B functions
+        teamBOneRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(1);
+                displayTeamBRun("" + run);
+                displayCommentary("1 run for Team B, flighted outside off, brings out the reversey-percy again, swept through point for one");
+            }
+        });
+
+        teamBTwoRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(2);
+                displayTeamBRun("" + run);
+                displayCommentary("2 runs for Team B, driven ambitiously on the up, carved over cover point, in the air but no one's there - the batsman carnival of batting rumbles on!");
+            }
+        });
+
+        teamBThreeRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(3);
+                displayTeamBRun("" + run);
+                displayCommentary("3 runs for Team B, full outside off, good response from Batsman as he gets forward and pushes firmly through the covers");
+            }
+        });
+
+        teamBFourRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(4);
+                displayTeamBRun("" + run);
+                displayCommentary("FOUR, four more runs for Team B, a full toss from the bowler and batsman belts it away through midwicket");
+            }
+        });
+
+        teamBSixRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(6);
+                displayTeamBRun("" + run);
+                displayCommentary("SIX for Team B, full and on off, Batsman's times it to perfection as he lofts it with a straight bat over long-off.");
+            }
+        });
+
+        teamBWides.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(1);
+                displayTeamBRun("" + run);
+                displayCommentary("1 wide for Team B, first signs of swing , but too wide");
+            }
+        });
+
+        teamBNoBalls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(1);
+                displayTeamBRun("" + run);
+                displayCommentary("1 no ball for Team B, over steps for a no-ball! Batsman has another wild swing and a miss outside off.");
+            }
+        });
+
+        teamBLegByes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(1);
+                displayTeamBRun("" + run);
+                displayCommentary("1 leg bye for Team B, full on middle, pushed through flat, Batsman tries the big slog again and missed it. This looked plumb but the umpire is not interested. Boos from the crowd on the replay.");
+            }
+        });
+
+        teamBByes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int run = addRunsForB(1);
+                displayTeamBRun("" + run);
+                displayCommentary("1 bye for Team B, darted into leg stump, tries to sweep, misses and it goes off the fielder for a run");
+            }
+        });
+
+        teamBWicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lostTeamBWicket();
+            }
+        });
+
+        resetScores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                totalRunForA = 0;
+                totalRunForB = 0;
+                displayTeamARun("" + totalRunForA);
+                displayTeamBRun("" + totalRunForB);
+                displayCommentary("");
+            }
+        });
+
 
     }
 
 
     public void displayTeamARun(String run) {
         TextView scores = (TextView) findViewById(R.id.team_a_scores_text_view);
+        scores.setText(run);
+    }
+
+    public void displayTeamBRun(String run) {
+        TextView scores = (TextView) findViewById(R.id.team_b_scores_text_view);
         scores.setText(run);
     }
 
@@ -138,9 +263,19 @@ public class MainActivity extends AppCompatActivity {
         commentary_text.setText("OUT, Doesn't clear long on this time! Head went again to another length ball, didn't nail it, Batsman got a good piece of it but it flew flat to the fielder on the rope and he takes a very good catch running along the rope");
     }
 
-    public int addRuns(int run) {
-        totalRun = totalRun + run;
-        return totalRun;
+    public void lostTeamBWicket() {
+        TextView commentary_text = (TextView) findViewById(R.id.commentary_box_text_view);
+        commentary_text.setText("OUT, Doesn't clear long on this time! Head went again to another length ball, didn't nail it, Batsman got a good piece of it but it flew flat to the fielder on the rope and he takes a very good catch running along the rope");
+    }
+
+    public int addRunsForA(int run) {
+        totalRunForA = totalRunForA + run;
+        return totalRunForA;
+    }
+
+    public int addRunsForB(int run) {
+        totalRunForB = totalRunForB + run;
+        return totalRunForB;
     }
 
 }
