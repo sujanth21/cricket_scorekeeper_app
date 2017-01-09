@@ -1,5 +1,7 @@
 package com.sujanth.cricketgame_scorekeeperapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
     int totalRunForA = 0;
     int totalRunForB = 0;
+    int totalWicketForA = 0;
+    int totalWicketForB = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Reset Score Button
         Button resetScores = (Button) findViewById(R.id.reset_score_button);
+
+        //Game rules button
+        Button gameRules = (Button) findViewById(R.id.game_rules_button);
 
         teamAOneRun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
         teamAWicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lostTeamAWicket();
+                int wicket = lostTeamAWicket(1);
+                displayTeamAWicket("" + wicket);
             }
         });
 
@@ -224,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
         teamBWicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lostTeamBWicket();
+                int wicket = lostTeamBWicket(1);
+                displayTeamBWicket("" + wicket);
             }
         });
 
@@ -233,9 +242,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 totalRunForA = 0;
                 totalRunForB = 0;
+                totalWicketForA = 0;
+                totalWicketForB = 0;
                 displayTeamARun("" + totalRunForA);
                 displayTeamBRun("" + totalRunForB);
                 displayCommentary("");
+                displayTeamAWicket("" + totalWicketForA);
+                displayTeamBWicket("" + totalWicketForB);
+            }
+        });
+
+        gameRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browseCricketRules = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icc-cricket.com/cricket-rules-and-regulations"));
+                startActivity(browseCricketRules);
             }
         });
 
@@ -258,14 +279,28 @@ public class MainActivity extends AppCompatActivity {
         commentary_text.setText(commentary);
     }
 
-    public void lostTeamAWicket() {
-        TextView commentary_text = (TextView) findViewById(R.id.commentary_box_text_view);
-        commentary_text.setText("OUT, Doesn't clear long on this time! Head went again to another length ball, didn't nail it, Batsman got a good piece of it but it flew flat to the fielder on the rope and he takes a very good catch running along the rope");
+    public void displayTeamAWicket(String wicket) {
+        TextView wickets = (TextView) findViewById(R.id.team_a_wicket_display_text_view);
+        wickets.setText(wicket);
     }
 
-    public void lostTeamBWicket() {
+    public void displayTeamBWicket(String wicket) {
+        TextView wickets = (TextView) findViewById(R.id.team_b_wicket_display_text_view);
+        wickets.setText(wicket);
+    }
+
+    public int lostTeamAWicket(int wicket) {
+        totalWicketForA = totalWicketForA + wicket;
         TextView commentary_text = (TextView) findViewById(R.id.commentary_box_text_view);
         commentary_text.setText("OUT, Doesn't clear long on this time! Head went again to another length ball, didn't nail it, Batsman got a good piece of it but it flew flat to the fielder on the rope and he takes a very good catch running along the rope");
+        return totalWicketForA;
+    }
+
+    public int lostTeamBWicket(int wicket) {
+        totalWicketForB = totalWicketForB + wicket;
+        TextView commentary_text = (TextView) findViewById(R.id.commentary_box_text_view);
+        commentary_text.setText("OUT, Doesn't clear long on this time! Head went again to another length ball, didn't nail it, Batsman got a good piece of it but it flew flat to the fielder on the rope and he takes a very good catch running along the rope");
+        return totalWicketForB;
     }
 
     public int addRunsForA(int run) {
@@ -277,5 +312,6 @@ public class MainActivity extends AppCompatActivity {
         totalRunForB = totalRunForB + run;
         return totalRunForB;
     }
+
 
 }
